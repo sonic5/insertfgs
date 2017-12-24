@@ -4,4 +4,4 @@ class Worker:
     workerName=''
     workerApart=''
     workerPow='1'
-    
+     

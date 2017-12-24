@@ -16,4 +16,4 @@ class User:
     wholeSet=''
     cardId=''
     tele=''
-    workerId=''
+    workerId='' 

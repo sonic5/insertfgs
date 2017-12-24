@@ -11,7 +11,7 @@ class MySQLCommand(object):
         self.db = db
         self.table = table
         
-
+ 
     def connectMysql(self):
         try:
             self.conn = pymysql.connect(host=self.host,port=self.port,user=self.user,passwd=self.password,db=self.db,charset='utf8',cursorclass = pymysql.cursors.DictCursor)
