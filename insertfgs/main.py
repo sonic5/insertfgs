@@ -47,7 +47,7 @@ def splitn(s):
 cm = db.MySQLCommand('127.0.0.1', 3306, 'root', 'a4152637', 'fgs')
 cm.connectMysql()
 
-data = xlrd.open_workbook('C:/Users/Administrator/Desktop/11.xlsx')
+data = xlrd.open_workbook('C:/Users/Administrator/Desktop/lk.xlsx')
 table=data.sheet_by_index(0)
 
 for i in range(1,table.nrows ):
