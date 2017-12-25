@@ -3,13 +3,13 @@ import pymysql
 import traceback
 
 class MySQLCommand(object):
-    def __init__(self,host,port,user,passwd,db,table):
+    def __init__(self,host,port,user,passwd,db):
         self.host = host
         self.port = port
         self.user = user
         self.password = passwd
         self.db = db
-        self.table = table
+        
         
  
     def connectMysql(self):

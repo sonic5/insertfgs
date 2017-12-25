@@ -1,13 +1,42 @@
 from json import dumps as json_dumps
 
-from sanic import Sanic
-from sanic.response import json
+# from sanic import Sanic
+# from sanic.response import json
 import xlrd
 
 import db
 from model.user import User
 from model.worker import Worker
-
+def getec(i,j,cint=False):
+    if table.row_values(i)[j]!='':
+         if str(table.row_values(i)[j])[0]=="'":
+             return str(table.row_values(i)[j])[1:]
+  
+         else:
+             if cint:
+                 try:
+                     return str(int(table.row_values(i)[j]))
+                 except:
+                     return str(table.row_values(i)[j])
+             return str(table.row_values(i)[j])
+    else:
+        return '' 
+    
+    
+def splitn(s):
+    if s.find(",")!=-1:
+        return s
+    n=3
+    l=[s[i:i+n] for i in range(0, len(s), n)]
+    r=''
+    for i in range(l.__len__()):
+        if i==l.__len__()-1:
+            r+=l[i]
+        else:           
+            r+=l[i]+','
+    return r    
+            
+         
  
 # from gi import require_version
 # require_version('Atspi', '2.0')
@@ -15,37 +44,33 @@ from model.worker import Worker
 # 
 # @app.route("/")
 # async def test(request):
-cm = db.MySQLCommand('127.0.0.1', 3306, 'root', 'a4152637', 'fgs', 'worker')
+cm = db.MySQLCommand('127.0.0.1', 3306, 'root', 'a4152637', 'fgs')
 cm.connectMysql()
 
-data = xlrd.open_workbook('/home/sonic/1.xlsx')
+data = xlrd.open_workbook('C:/Users/Administrator/Desktop/11.xlsx')
 table=data.sheet_by_index(0)
 
 for i in range(1,table.nrows ):
      
     user=User()
-    user.userName=str(table.row_values(i)[0])
-    user.contractId=str(table.row_values(i)[1])[1:]
-    user.address=str(table.row_values(i)[2])
-    user.gate=str(int(table.row_values(i)[3]))
-    user.room=str(table.row_values(i)[4])
-    user.manageState=str(table.row_values(i)[5])
-    user.property=str(table.row_values(i)[6])
-    user.selfArea=str(table.row_values(i)[7])
-    user.sharedArea=str(table.row_values(i)[8])
-    user.quotaFee=str(table.row_values(i)[9])
-    user.remission=str(table.row_values(i)[10])
-    user.pl=str(table.row_values(i)[11])
-    user.fee=str(table.row_values(i)[12])
-    user.wholeSet=str(table.row_values(i)[13])
-    if table.row_values(i)[14]!='' or table.row_values(i)[14]!="'":
-        user.cardId=str(table.row_values(i)[14])[1:]
-    else:
-        user.cardId=''
-    if table.row_values(i)[15]!='':
-        user.tele=str(int(table.row_values(i)[15]))
-    else:
-        user.tele=''
+    user.userName=getec(i,0)
+    user.contractId=getec(i,1)
+    user.address=getec(i,2)
+    user.gate=getec(i,3,True)
+    user.room=splitn(getec(i,4,True))
+    user.manageState=getec(i,5)
+    user.property=getec(i,6)
+    user.selfArea=getec(i,7)
+    user.sharedArea=getec(i,8)
+    user.quotaFee=getec(i,9)
+    user.remission=getec(i,10)
+    user.pl=getec(i,11)
+    user.fee=getec(i,12)
+    user.wholeSet=getec(i,13)
+    user.cardId=getec(i,14)
+
+    user.tele=getec(i,15,True)
+
     user.workerId='lk'
     user.id='0'
  
