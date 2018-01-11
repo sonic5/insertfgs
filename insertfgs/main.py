@@ -47,7 +47,7 @@ def splitn(s):
 cm = db.MySQLCommand('127.0.0.1', 3306, 'root', 'a4152637', 'fgs')
 cm.connectMysql()
 
-data = xlrd.open_workbook('C:/Users/Administrator/Desktop/lk.xlsx')
+data = xlrd.open_workbook('/home/sonic/1.xlsx')
 table=data.sheet_by_index(0)
 
 for i in range(1,table.nrows ):
@@ -71,9 +71,9 @@ for i in range(1,table.nrows ):
 
     user.tele=getec(i,15,True)
 
-    user.workerId='lk'
+    user.workerId='1'
     user.id='0'
- 
+    user.balance='0'
     obj = user.__dict__
   
     print(obj)
@@ -95,7 +95,8 @@ for i in range(1,table.nrows ):
     %(wholeSet)s,
     %(cardId)s,
     %(tele)s,
-    %(workerId)s
+    %(workerId)s,
+    %(balance)s
     )''', obj)
   
 # 

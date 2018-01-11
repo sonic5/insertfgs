@@ -17,3 +17,4 @@ class User:
     cardId=''
     tele=''
     workerId='' 
+    balance=''
